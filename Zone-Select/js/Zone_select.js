@@ -2,7 +2,6 @@
 	//定义插件中所有公共方法
 	let methods={
 		init:function(options){
-			console.log(options);
 			return this.each(function(){
 				let $this=$(this);
 				let settings=$this.data('zone');
@@ -49,14 +48,27 @@
 				}
 			})
 		},
-		getzone_val:function(){
-			
+		getzone_val:function(str){
+			let getzone_val=new Array();
+			if("all"===str){
+				getzone_val.push($(".province select option:selected").text());
+				getzone_val.push($(".city select option:selected").text());
+				getzone_val.push($(".district select option:selected").text());
+			}else if("province"===str){
+				getzone_val.push($(".province select option:selected").text());
+			}else if("city"===str){
+				getzone_val.push($(".city select option:selected").text());
+			}else if("district"===str){
+				getzone_val.push($(".district select option:selected").text());
+			}
+			return getzone_val;
 		}
 	}
 	
 	$.fn.zone=function(){
 		//判断传入参数是否存在对应方法
 		let method = arguments[0];
+		console.log(arguments);
 		if(methods[method]) {
 			method = methods[method];
 			arguments = Array.prototype.slice.call(arguments, 1);

@@ -12,14 +12,19 @@
  <body>  
 	<div id="frame" > 
 	</div>  
-	
+	<button id="zone_val">获得地区</button>
 </body>  
 <style>
 	
 </style>
 <script>
     $(function(){
-    	$("#frame").zone({beautify:false,select_filter:false});
+    	$("#frame").zone({beautify:true,select_filter:true});
+    	$("#zone_val").click(function(){
+    		var a=$("#frame").zone("getzone_val","all");
+
+    	})
+    	
     })
 	
 </script>
