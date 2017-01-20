@@ -1,0 +1,96 @@
+.zone_select>span select
+{
+	scrollbar-face-color:#FB4446; /*滚动条3D表面（ThreedFace）的颜色*/ 
+	scrollbar-highlight-color:#fff; /*滚动条3D界面的亮边（ThreedHighlight）颜色*/ 
+	scrollbar-shadow-color:#eeeeee; /*滚动条3D界面的暗边（ThreedShadow）颜色*/ 
+	scrollbar-3dlight-color:#eeeeee; /*滚动条亮边框颜色*/ 
+	scrollbar-arrow-color:#000; /*滚动条方向箭头的颜色 */ 
+	scrollbar-track-color:#fff; /*滚动条的拖动区域(TrackBar)颜色*/
+	scrollbar-darkshadow-color:#fff; /*滚动条暗边框（ThreedDarkShadow）颜色*/ 
+}
+.zone_select{
+	width: 100%;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+.zone_select>span{
+	width: 33%;display: inline-block;
+}
+.zone_select>span select{
+	display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.zone_select>span select option{width: 100%;}
+.zone_select>span>div>span{
+	display: block;
+    width: 100%;
+	height: 32px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    position: relative;
+}
+.zone_select>span>div>span>i{
+	border-top: 7px solid #8e9191;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	width: 0px;
+	height: 0px;
+	display: inline-block;
+	position: relative;
+	right: 10px;
+	top: 40%;
+	float: right;
+}
+.zone_select>span>div{
+	position: relative;
+}
+.zone_select>span>div>div{
+	display: inline-block;
+	position: absolute;
+	width: 100%;
+	display: none;
+}
+.zone_select>span>div>div>input{
+	font-size: 14px;
+    text-align: center;
+    line-height: 32px;
+    color: #555;
+    background-color: #fff;
+    width: 98%;
+    border-radius: 4px;
+    
+}
+.zone_select>span>div>div>ul{
+	font-size: 14px;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+    color: #555;
+    background-color: #fff;
+    height: 300px;
+    overflow: auto;
+}
+.zone_select>span>div>div>ul>li:hover{
+	background-color: #8e9191;
+}
