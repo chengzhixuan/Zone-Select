@@ -1,13 +1,13 @@
 (function($){
 	//定义插件中所有公共方法
-	let methods={
+	var methods={
 		init:function(options){
 			return this.each(function(){
-				let $this=$(this);
-				let settings=$this.data('zone');
+				var $this=$(this);
+				var settings=$this.data('zone');
 				if(typeof(settings)== 'undefined'){
 					//定义插件的默认值
-					let dft={
+					var dft={
 						beautify:true,//美化
 						select_filter:true//下拉列表编辑是否开启,如果开启美化列表自动开启
 					};
@@ -19,24 +19,24 @@
 				if(settings.select_filter){
 					settings.beautify=true;
 				}
-				let city_data=privateFunction();
-				let province="<option value='null'>请选择</option>";
-				for(let i=0;i<city_data.Items["0"].length;i++){
+				var city_data=privateFunction();
+				var province="<option value='null'>请选择</option>";
+				for(var i=0;i<city_data.Items["0"].length;i++){
 					province+="<option value='0_"+i+"'>"+city_data.Items["0"][i]+"</option>"
 				}
-				let city_txt = "<div class='zone_select'><span class='province'><select>"+province+"</select></span><span class='city'><select><option>请选择</option></select></span><span class='district'><select><option>请选择</option></select></span></div>";
+				var city_txt = "<div class='zone_select'><span class='province'><select>"+province+"</select></span><span class='city'><select><option>请选择</option></select></span><span class='district'><select><option>请选择</option></select></span></div>";
 				$(this).append(city_txt);
 				
 				//开启美化的功能 
 				if(settings.beautify){
 					$(".zone_select span select").css("display","none");//test
-					let zone_province_beautify_li="<li data-value='null'>请选择</li>";
-					for(let i=0;i<city_data.Items["0"].length;i++){
+					var zone_province_beautify_li="<li data-value='null'>请选择</li>";
+					for(var i=0;i<city_data.Items["0"].length;i++){
 						zone_province_beautify_li+="<li data-value='0_"+i+"'>"+city_data.Items["0"][i]+"</li>"
 					}
-					let zone_province_beautify='<div><span id="zone_province_val"><a>请选择</a><i></i></span><div><ul>'+zone_province_beautify_li+'</ul></div></div>';
-					let zone_city_beautify='<div><span id="zone_city_val"><a>请选择</a><i></i></span><div><ul><li></li></ul></div></div>';
-					let zone_district_beautify='<div><span id="zone_district_val"><a>请选择</a><i></i></span><div><ul><li></li></ul></div></div>';
+					var zone_province_beautify='<div><span id="zone_province_val"><a>请选择</a><i></i></span><div><ul>'+zone_province_beautify_li+'</ul></div></div>';
+					var zone_city_beautify='<div><span id="zone_city_val"><a>请选择</a><i></i></span><div><ul><li></li></ul></div></div>';
+					var zone_district_beautify='<div><span id="zone_district_val"><a>请选择</a><i></i></span><div><ul><li></li></ul></div></div>';
 					if(settings.select_filter){
 						zone_province_beautify='<div><span id="zone_province_val"><a>请选择</a><i></i></span><div><input type="text" ><ul>'+zone_province_beautify_li+'</ul></div></div>';
 						zone_city_beautify='<div><span id="zone_city_val"><a>请选择</a><i></i></span><div><input type="text" ><ul><li></li></ul></div></div>';
@@ -49,7 +49,7 @@
 			})
 		},
 		getzone_val:function(str){
-			let getzone_val=new Array();
+			var getzone_val=new Array();
 			if("all"===str){
 				getzone_val.push($(".province select option:selected").text());
 				getzone_val.push($(".city select option:selected").text());
@@ -60,6 +60,8 @@
 				getzone_val.push($(".city select option:selected").text());
 			}else if("district"===str){
 				getzone_val.push($(".district select option:selected").text());
+			}else{
+				getzone_val.push("参数错误");
 			}
 			return getzone_val;
 		}
@@ -67,7 +69,7 @@
 	
 	$.fn.zone=function(){
 		//判断传入参数是否存在对应方法
-		let method = arguments[0];
+		var method = arguments[0];
 		console.log(arguments);
 		if(methods[method]) {
 			method = methods[method];
@@ -79,29 +81,29 @@
 			return this;
 		}
 		//没开启美化的时候点击select，后面的selectde内容改变
-		let city_data=privateFunction();
+		var city_data=privateFunction();
 		this.on("change",".zone_select .province select",function(){
-			let province_id=$(this).val();
+			var province_id=$(this).val();
 			$(".zone_select .district select").html("<option value='null'>请选择</option>");
 			if(province_id=='null'){
 				$(".zone_select .city select").html("<option value='null'>请选择</option>");
 				return
 			}else{
-				let city="<option value='null'>请选择</option>";
-				for(let i=0;i<city_data.Items[province_id].length;i++){
+				var city="<option value='null'>请选择</option>";
+				for(var i=0;i<city_data.Items[province_id].length;i++){
 					city+="<option value='"+province_id+"_"+i+"'>"+city_data.Items[province_id][i]+"</option>"
 				}
 				$(".zone_select .city select").html(city);
 			}
 		})
 		this.on("change",".zone_select .city select",function(){
-			let city_id=$(this).val();
+			var city_id=$(this).val();
 			if(city_id=='null'){
 				$(".zone_select .district select").html("<option value='null'>请选择</option>");
 				return;
 			}else{
-				let district="<option value='null'>请选择</option>"
-				for(let i=0;i<city_data.Items[city_id].length;i++){
+				var district="<option value='null'>请选择</option>"
+				for(var i=0;i<city_data.Items[city_id].length;i++){
 					district+="<option value='"+city_id+"_"+i+"'>"+city_data.Items[city_id][i]+"</option>"
 				}
 				$(".zone_select .district select").html(district);
@@ -115,13 +117,13 @@
 		//开启美化的选选择操作
 		this.on("click",".zone_select>span>div>div>ul>li",function(){
 			$(this).parent().parent().toggle();
-			let zone_beautify_daval=$(this).attr("data-value");
-			let zone_beautify_txt=$(this).text();
-			let zone_beautify_txt_old=$(this).parent().parent().prev().children("a").text();
+			var zone_beautify_daval=$(this).attr("data-value");
+			var zone_beautify_txt=$(this).text();
+			var zone_beautify_txt_old=$(this).parent().parent().prev().children("a").text();
 			/*如果内容没变就不进行操作*/
 			if(zone_beautify_txt!=zone_beautify_txt_old){
 				$(this).parent().parent().prev().children("a").text(zone_beautify_txt);
-				let zone_this_id=$(this).parent().parent().prev().attr("id");
+				var zone_this_id=$(this).parent().parent().prev().attr("id");
 				/*省份改变时进行的操作*/
 				if(zone_this_id=='zone_province_val'){
 					$(".province select").val(zone_beautify_daval);
@@ -129,9 +131,9 @@
 					$("#zone_city_val a").text("请选择");
 					$("#zone_district_val a").text("请选择");
 					$(".city>div>div,.district>div>div").css("display","none");
-					let city="<li data-value='null'>请选择</li>";
+					var city="<li data-value='null'>请选择</li>";
 					if(zone_beautify_daval!='null'){
-						for(let i=0;i<city_data.Items[zone_beautify_daval].length;i++){
+						for(var i=0;i<city_data.Items[zone_beautify_daval].length;i++){
 							city+="<li data-value='"+zone_beautify_daval+"_"+i+"'>"+city_data.Items[zone_beautify_daval][i]+"</li>"
 						}
 					}
@@ -140,10 +142,10 @@
 					$(".city select").val(zone_beautify_daval);
 					$(".city select").trigger("change");
 					$("#zone_district_val a").text("请选择");
-					let city="<li data-value='null'>请选择</li>";
+					var city="<li data-value='null'>请选择</li>";
 					$(".district>div>div").css("display","none");
 					if(zone_beautify_daval!='null'){
-						for(let i=0;i<city_data.Items[zone_beautify_daval].length;i++){
+						for(var i=0;i<city_data.Items[zone_beautify_daval].length;i++){
 							city+="<li data-value='"+zone_beautify_daval+"_"+i+"'>"+city_data.Items[zone_beautify_daval][i]+"</li>"
 						}
 					}
@@ -156,13 +158,13 @@
 			}
 		})
 		this.on("keyup",".zone_select>span>div>div>input",function(event){
-			let last_keyup=event.timeStamp;
-			let $this=$(this)
+			var last_keyup=event.timeStamp;
+			var $this=$(this)
 			setTimeout(function(){
 				if(last_keyup-event.timeStamp==0){
-					let zone_select_input=$this.val();
-					let zone_select_li=$this.next().children("li");
-					for(let i=0;i<zone_select_li.length;i++){
+					var zone_select_input=$this.val();
+					var zone_select_li=$this.next().children("li");
+					for(var i=0;i<zone_select_li.length;i++){
 						if(zone_select_li[i].innerText.indexOf(zone_select_input)==-1){
 							zone_select_li[i].style.display="none";
 						}else{
@@ -184,8 +186,8 @@
 	Dsy.prototype.add = function(id,iArray){
 		this.Items[id] = iArray;
 	};
-	let privateFunction=function(){
-		let dsy = new Dsy();
+	var privateFunction=function(){
+		var dsy = new Dsy();
 		dsy.add("0",["北京市","天津市","上海市","重庆市","河北省","山西省","内蒙古","辽宁省","吉林省","黑龙江省","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西","海南省","四川省","贵州省","云南省","西藏","陕西省","甘肃省","青海省","宁夏","新疆","香港","澳门","台湾省"]);
 		
 		dsy.add("0_0_0",["东城区","西城区","崇文区","宣武区","朝阳区","丰台区","石景山区","海淀区","门头沟区","房山区","通州区","顺义区","昌平区","大兴区","怀柔区","平谷区","密云县","延庆县","延庆镇"]);
